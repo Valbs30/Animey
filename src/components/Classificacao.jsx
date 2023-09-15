@@ -1,10 +1,8 @@
-export default function Classificacao(anime) {
-    const {animeClass} = anime
+export default function Classificacao({classe}) {
 
     let imgClass = ""
-    console.log (anime)
-    console.log (anime.class)
-    switch (animeClass) {
+
+    switch (classe) {
         case "L":
             imgClass = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/DJCTQ_-_L.svg/42px-DJCTQ_-_L.svg.png"
             break
