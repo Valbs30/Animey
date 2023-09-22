@@ -31,7 +31,7 @@ export default function CardAnime({ anime }) {
     return (
         <div className="flex flex-col items-center w-40 m-2 gap-1 bg-zinc-700 rounded">
             <div className="relative">
-                <img className="p-1" src={anime.jpg.image_url} alt="" />
+                <img className="p-1 h-60" src={anime.images.jpg.image_url} alt="" />
 
                 <div className="absolute top-0 left-0 m-1.5 w-9 h-9 rounded border border-black">
                     <Classificacao classe = {anime.rating}></Classificacao>
@@ -58,9 +58,9 @@ export default function CardAnime({ anime }) {
 
                 <span className="bg-zinc-700 p-1 rounded absolute bottom-0 left-0 m-1.5 text-xs">
                     {anime.episodes === 1 ?
-                        anime.episodes + " Temporada"
+                        anime.episodes + " Episódio"
                         :
-                        anime.episodes + " Temporadas"
+                        anime.episodes + " Episódios"
                     }
                 </span>
 
