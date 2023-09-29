@@ -21,6 +21,9 @@ export default function Classificacao({classe}) {
         case "R+ - Mild Nudity":
             imgClass = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/DJCTQ_-_18.svg/42px-DJCTQ_-_18.svg.png"
             break
+        case "Rx - Hentai":
+            imgClass = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/DJCTQ_-_18.svg/42px-DJCTQ_-_18.svg.png"
+            break
         default:
             imgClass = "#"
     }

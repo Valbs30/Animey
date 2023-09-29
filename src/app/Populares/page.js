@@ -22,8 +22,8 @@ async function carregarDados(url) {
 }
 
 export default async function Home() {
-	const mvurl = "https://api.jikan.moe/v4/top/anime?filter=airing"
-	const mvanimes = await carregarDados(mvurl)
+	const popurl = "https://api.jikan.moe/v4/top/anime?filter=bypopularity"
+	const popanimes = await carregarDados(popurl)
 
 	return (
 		<>
@@ -44,10 +44,10 @@ export default async function Home() {
 				<a href="#" className="text-lg">Sobre</a>
 			</nav>
 
-			<Titulo>Mais Vistos</Titulo>
+			<Titulo>Populares</Titulo>
 
 			<section className="flex flex-wrap gap-2">
-				{mvanimes.map(anime => <CardAnime anime={anime} />)}
+				{popanimes.map(anime => <CardAnime anime={anime} />)}
 			</section>
 
 		</>

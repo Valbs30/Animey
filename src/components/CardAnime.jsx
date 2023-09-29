@@ -60,7 +60,11 @@ export default function CardAnime({ anime }) {
                         anime.episodes === 1 ?
                             anime.episodes + " Episódio"
                             :
+                            ( anime.episodes === null ?
+                            "+999 Episódios"
+                            :
                             anime.episodes + " Episódios"
+                            )
                     )}
                 </span>
 

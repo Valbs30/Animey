@@ -18,29 +18,32 @@ async function carregarDados(url) {
 		popularity: anime.popularity
 	  }))
 
-	return dadosFiltrados.slice(0, 8)
+	return dadosFiltrados.slice(0, 6)
 	//.slice(0, 10)
 }
 
 export default async function Home() {
+	const mvurl = "https://api.jikan.moe/v4/top/anime?filter=airing"
+	const mvanimes = await carregarDados(mvurl)
 	const popurl = "https://api.jikan.moe/v4/top/anime?filter=bypopularity"
 	const popanimes = await carregarDados(popurl)
 	const favurl = "https://api.jikan.moe/v4/top/anime?filter=favorite"
 	const favanimes = await carregarDados(favurl)
 	const topurl = "https://api.jikan.moe/v4/top/anime"
 	const topanimes = await carregarDados(topurl)
-
+	console.log(mvanimes)
 	return ( //JSX
 		<>
 			<nav className="bg-neutral-800 px-10 py-4 flex items-end justify-between">
-				<div className="flex items-end gap-20">
+				<div className="flex items-end gap-16">
 					<h1 className="text-3xl font-bold text-zinc-100">Animey</h1>
 					<ul>
-						<li className="flex gap-20 text-lg">
+						<li className="flex gap-10 text-lg">
+							<a href="/Lancamentos">Lançamentos</a>
 							<a href="/Mais_Vistos">Mais Vistos</a>
+							<a href="/Populares">Populares</a>
 							<a href="/Favoritos">Favoritos</a>
 							<a href="/Melhores_Notas">Melhores Notas</a>
-							<a href="/Lancamentos">Lançamentos</a>
 							<a href="#">Meus Favoritos</a>
 						</li>
 					</ul>
@@ -49,6 +52,12 @@ export default async function Home() {
 			</nav>
 
 			<Titulo>Mais Vistos</Titulo>
+
+			<section className="flex flex-wrap gap-2">
+				{mvanimes.map(anime => <CardAnime anime={anime} />)}
+			</section>
+
+			<Titulo>Populares</Titulo>
 
 			<section className="flex flex-wrap gap-2">
 				{popanimes.map(anime => <CardAnime anime={anime} />)}

@@ -22,7 +22,7 @@ async function carregarDados(url) {
 }
 
 export default async function Home() {
-    const topurl = "https://api.jikan.moe/v4/top/anime"
+    const topurl = "https://api.jikan.moe/v4/top/anime?type=tv"
 	const topanimes = await carregarDados(topurl)
     const topmovurl = "https://api.jikan.moe/v4/top/anime?type=movie"
 	const topmovanimes = await carregarDados(topmovurl)
@@ -30,14 +30,15 @@ export default async function Home() {
 	return (
 		<>
 			<nav className="bg-neutral-800 px-10 py-4 flex items-end justify-between">
-				<div className="flex items-end gap-20">
+				<div className="flex items-end gap-16">
 					<h1 className="text-3xl font-bold text-zinc-100">Animey</h1>
 					<ul>
-						<li className="flex gap-20 text-lg">
+						<li className="flex gap-10 text-lg">
+							<a href="/Lancamentos">Lançamentos</a>
 							<a href="/Mais_Vistos">Mais Vistos</a>
+							<a href="/Populares">Populares</a>
 							<a href="/Favoritos">Favoritos</a>
 							<a href="/Melhores_Notas">Melhores Notas</a>
-							<a href="/Lancamentos">Lançamentos</a>
 							<a href="#">Meus Favoritos</a>
 						</li>
 					</ul>
