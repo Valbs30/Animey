@@ -1,56 +1,75 @@
 import CardAnime from '@/components/CardAnime'
 import Titulo from '@/components/Titulo'
 
-async function carregarDados() {
-	const url = "https://api.jikan.moe/v4/top/anime"
+async function carregarDados(url) {
 	const response = await fetch(url)
 	const json = await response.json()
-	return json.data
+
+	const dadosFiltrados = json.data.map(anime => ({
+		mal_id: anime.mal_id,
+		url: anime.url,
+		title: anime.title,
+		images: anime.images,
+		rating: anime.rating,
+		score: anime.score,
+		type: anime.type,
+		episodes: anime.episodes,
+		rank: anime.rank,
+		popularity: anime.popularity
+	  }))
+
+	return dadosFiltrados.slice(0, 8)
+	//.slice(0, 10)
 }
 
 export default async function Home() {
-	try {
-		const animes = await carregarDados();
+	const popurl = "https://api.jikan.moe/v4/top/anime?filter=bypopularity"
+	const popanimes = await carregarDados(popurl)
+	const favurl = "https://api.jikan.moe/v4/top/anime?filter=favorite"
+	const favanimes = await carregarDados(favurl)
+	const topurl = "https://api.jikan.moe/v4/top/anime"
+	const topanimes = await carregarDados(topurl)
 
-		if (!Array.isArray(animes)) {
-			// Se 'animes' não for um array, trate o erro de alguma forma
-			console.error('Os dados carregados não são um array:', animes)
-			return null // ou outra ação apropriada
-		}
+	return ( //JSX
+		<>
+			<nav className="bg-neutral-800 px-10 py-4 flex items-end justify-between">
+				<div className="flex items-end gap-20">
+					<h1 className="text-3xl font-bold text-zinc-100">Animey</h1>
+					<ul>
+						<li className="flex gap-20 text-lg">
+							<a href="/Mais_Vistos">Mais Vistos</a>
+							<a href="/Favoritos">Favoritos</a>
+							<a href="/Melhores_Notas">Melhores Notas</a>
+							<a href="/Lancamentos">Lançamentos</a>
+							<a href="#">Meus Favoritos</a>
+						</li>
+					</ul>
+				</div>
+				<a href="#" className="text-lg">Sobre</a>
+			</nav>
 
-		console.log(animes)
+			<Titulo>Mais Vistos</Titulo>
 
-		return ( //JSX
-			<>
-				<nav className="bg-neutral-800 px-10 py-4 flex items-end justify-between">
-					<div className="flex items-end gap-20">
-						<h1 className="text-3xl font-bold text-zinc-100">Animey</h1>
-						<ul>
-							<li className="flex gap-20 text-lg">
-								<a href="#">Mais Vistos</a>
-								<a href="#">Lançamentos</a>
-								<a href="#">Meus Favoritos</a>
-							</li>
-						</ul>
-					</div>
-					<a href="#" className="text-lg">Sobre</a>
-				</nav>
+			<section className="flex flex-wrap gap-2">
+				{popanimes.map(anime => <CardAnime anime={anime} />)}
+			</section>
 
-				<Titulo>Mais Vistos</Titulo>
+			<Titulo>Favoritos</Titulo>
 
-				<section className="flex flex-wrap gap-2">
-					{animes.map(anime => <CardAnime anime={anime} />)}
-				</section>
+			<section className="flex flex-wrap gap-2">
+				{favanimes.map(anime => <CardAnime anime={anime} />)}
+			</section>
 
-				<Titulo>Lançamentos</Titulo>
-				<Titulo>Meus Favoritos</Titulo>
+			<Titulo>Melhores Notas</Titulo>
 
-			</>
-		)
-	} catch (error) {
-		console.error('Ocorreu um erro ao carregar os dados:', error)
-		return null // ou outra ação apropriada
-	}
+			<section className="flex flex-wrap gap-2">
+				{topanimes.map(anime => <CardAnime anime={anime} />)}
+			</section>
+
+			<Titulo>Meus Favoritos</Titulo>
+
+		</>
+	)
 }
 
 /*import CardAnime from '@/components/CardAnime'
