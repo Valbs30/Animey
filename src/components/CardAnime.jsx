@@ -14,18 +14,22 @@ export default function CardAnime({ anime }) {
     }, [])
 
     function favoritar() {
-        const novoFavoritos = [...favoritos, anime.mal_id]
+        const novoFavoritos = [...favoritos, "https://api.jikan.moe/v4/anime/" + anime.mal_id]
         setFavoritos(novoFavoritos)
-        localStorage.setItem("favoritos", JSON.stringify(novoFavoritos))
+        const favoritosSalvos = JSON.parse(localStorage.getItem("favoritos")) || []
+        const novoFavoritosSalvos = [...favoritosSalvos, "https://api.jikan.moe/v4/anime/" + anime.mal_id]
+        localStorage.setItem("favoritos", JSON.stringify(novoFavoritosSalvos))
     }
 
     function desfavoritar() {
-        const novoFavoritos = favoritos.filter((id) => id !== anime.mal_id)
+        const novoFavoritos = favoritos.filter((id) => id !== "https://api.jikan.moe/v4/anime/" + anime.mal_id)
         setFavoritos(novoFavoritos)
-        localStorage.setItem("favoritos", JSON.stringify(novoFavoritos))
+        const favoritosSalvos = JSON.parse(localStorage.getItem("favoritos")) || []
+        const novoFavoritosSalvos = favoritosSalvos.filter((id) => id !== "https://api.jikan.moe/v4/anime/" + anime.mal_id)
+        localStorage.setItem("favoritos", JSON.stringify(novoFavoritosSalvos))
     }
 
-    const isFavorito = favoritos.includes(anime.mal_id)
+    const isFavorito = favoritos.includes("https://api.jikan.moe/v4/anime/" + anime.mal_id)
 
     return (
         <div className="flex flex-col items-center w-40 m-2 gap-1 bg-zinc-700 rounded flex-shrink-0">
@@ -76,7 +80,7 @@ export default function CardAnime({ anime }) {
 
             </div>
 
-            <span className="text-lg w-full line-clamp-1 text-center">
+            <span className="text-lg w-full line-clamp-1 text-center" title={anime.title}>
                 {anime.title}
             </span>
 

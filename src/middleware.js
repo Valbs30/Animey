@@ -7,5 +7,5 @@ export function middleware(request) {
 }
 
 export const config = {
-    matcher: ['/:path', '/Favoritos:path', '/Lancamentos', '/Mais_Vistos', '/Melhores_Notas', '/Populares']
+    matcher: ['/:path', '/Favoritos:path', '/Lancamentos', '/Mais_Vistos', '/Melhores_Notas', '/Meus_Favoritos', '/Populares']
 }
