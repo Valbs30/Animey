@@ -25,7 +25,6 @@ export default function NavBar() {
                         <Link href="/Populares">Populares</Link>
                         <Link href="/Favoritos">Favoritos</Link>
                         <Link href="/Melhores_Notas">Melhores Notas</Link>
-                        <Link href="/Meus_Favoritos">Meus Favoritos</Link>
                     </li>
                 </ul>
             </div>
