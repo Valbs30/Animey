@@ -23,8 +23,9 @@ async function carregarDados(url) {
 }
 
 export default async function Home() {
-    //const urlFavoritosSalvos = JSON.parse(localStorage.getItem("favoritos")) || []
-	//const animesFavoritos = await carregarDados(urlFavoritosSalvos)
+    const urlFavoritosSalvos = JSON.parse(localStorage.getItem("favoritos")) || []
+	const animesFavoritos = await carregarDados(urlFavoritosSalvos)
+    //const animesFavoritos = await Promise.all(urlFavoritosSalvos.map(url => carregarDados(url)))
 
 	return (
 		<>
@@ -32,9 +33,10 @@ export default async function Home() {
 
 			<Titulo>Meus Favoritos</Titulo>
 
-			{/*<section className="flex flex-wrap gap-2">
+			<section className="flex flex-wrap gap-2">
     			{animesFavoritos.map(anime => <CardAnime anime={anime} />)}
-			</section>*/}
+				{/*animesFavoritos.map(anime => anime.map(animeData => <CardAnime anime={animeData} />))*/}
+			</section>
 
 		</>
 	)
